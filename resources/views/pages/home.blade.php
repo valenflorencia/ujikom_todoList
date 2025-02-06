@@ -11,6 +11,11 @@
                 </button>
             </div>
         @endif
+             {{-- ini untuk tombol button tambah todo list --}}
+            <button type="button" class="btn btn-outline-primary flex-shrink-0 shadow-sm rounded-4" 
+            style="width: 17rem; height: fit-content;" data-bs-toggle="modal" data-bs-target="#addListModal">
+            <i class="bi bi-plus fs-5"></i> Tambah
+        </button>
 
         <div class="d-flex gap-4 px-3 flex-nowrap overflow-x-scroll pb-4">
             @foreach ($lists as $list)
@@ -31,9 +36,10 @@
                                 <div class="card border-0 shadow-sm">
                                     <div class="card-header bg-white d-flex align-items-center justify-content-between">
                                         <div>
-                                            <p class="fw-bold m-0 {{ $task->is_completed ? 'text-decoration-line-through text-muted' : '' }}">
+                                            {{-- untuk  --}}
+                                            <a href="{{ route('tasks.show', $task->id)}}" class="fw-bold m-0 {{ $task->is_completed ? 'text-decoration-line-through text-muted' : '' }}">
                                                 {{ $task->name }}
-                                            </p>
+                                            </a>
                                             <span class="badge text-bg-{{ $task->priorityClass }}">
                                                 {{ $task->priority }}
                                             </span>
@@ -63,7 +69,7 @@
                                 </div>
                             @endif
                         @endforeach
-
+                                    {{-- untuk menambah list --}}
                         <button type="button" class="btn btn-sm btn-outline-primary rounded-pill" 
                             data-bs-toggle="modal" data-bs-target="#addTaskModal" data-list="{{ $list->id }}">
                             <i class="bi bi-plus"></i> Tambah Tugas
@@ -74,11 +80,6 @@
                     </div>
                 </div>
             @endforeach
-
-            <button type="button" class="btn btn-outline-primary flex-shrink-0 shadow-sm rounded-4" 
-                style="width: 17rem; height: fit-content;" data-bs-toggle="modal" data-bs-target="#addListModal">
-                <i class="bi bi-plus fs-5"></i> Tambah
-            </button>
         </div>
     </div>
 @endsection

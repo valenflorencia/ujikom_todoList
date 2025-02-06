@@ -51,4 +51,16 @@ class TaskController extends Controller
 
         return redirect()->back();
     }
+    // untuk memanggil komen
+    public function show($id) {
+        // untuk menyuruh tampilkan kalo tidk ketemu akan gagal(fail)
+        $task = Task::findOrFail($id);
+
+        $data = [
+            'title' => 'Details' , 
+            'task' => $task, 
+        ];
+        // untuk memanggil view 
+        return view('pages.details', $data);
+    }
 }
