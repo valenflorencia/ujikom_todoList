@@ -17,10 +17,10 @@
         @endif
 
         <!-- Tombol utama untuk menambah daftar tugas -->
-        <button type="button" class="btn btn-outline-primary flex-shrink-0 shadow-sm rounded-4" 
-            style="width: 17rem; height: fit-content;" data-bs-toggle="modal" data-bs-target="#addListModal">
-            <i class="bi bi-plus fs-5"></i> Tambah
-        </button>
+        <button type="button" class="btn btn-outline-primary flex-shrink-0 shadow-sm rounded-4 mb-2" 
+        style="width: 17rem; height: fit-content;" data-bs-toggle="modal" data-bs-target="#addListModal">
+        <i class="bi bi-plus fs-5"></i> Tambah
+    </button>
 
         <!-- Container untuk daftar tugas, bisa di-scroll secara horizontal -->
         <div class="d-flex gap-4 px-3 flex-nowrap overflow-x-scroll pb-4">
