@@ -1,18 +1,7 @@
 <nav class="navbar navbar-expand-lg bg-success navbar-light fixed-top">
-    <div class="container d-flex justify-content-between">
+    <div class="container d-flex justify-content-center">
         <!-- Nama Aplikasi -->
-        <a class="navbar-brand fw-bolder text-white" href="#">MyAppTugas</a>
-
-        <!-- Search Form -->
-        <!-- Fitur pencarian tugas -->
-        <form class="d-flex w-45 position-relative">
-            <!-- Input untuk pencarian -->
-            <input class="form-control rounded-pill px-4" type="search" placeholder="Cari tugas..." aria-label="Search">
-            <!-- Tombol pencarian dengan ikon -->
-            <button class="btn btn-light rounded-pill position-absolute end-0 me-2" type="submit">
-                <i class="bi bi-search"></i>
-            </button>
-        </form>
+        <a class="navbar-brand fw-bolder text-white" href="#">AppTugas</a>
     </div>
 </nav>
 
