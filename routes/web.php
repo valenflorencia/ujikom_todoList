@@ -21,3 +21,5 @@ Route::patch('/tasks/{task}/complete', [TaskController::class, 'complete'])->nam
 
 // Route untuk memperbarui tugas dengan metode PUT
 Route::put('/tasks/{id}', [TaskController::class, 'update'])->name('tasks.update');
+
+Route::PATCH('/tasks/{task}/update-list', [TaskController::class, 'updateList'])->name('tasks.updateList');
