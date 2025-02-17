@@ -16,16 +16,16 @@ class TaskSeeder extends Seeder
         // Data tugas yang akan dimasukkan ke dalam tabel tasks
         $tasks = [
             [
-                'name' => 'Belajar Laravel',
-                'description' => 'Belajar Laravel di santri koding',
-                'is_completed' => false,
-                'priority' => 'medium',
-                'list_id' => TaskList::where('name', 'Belajar')->first()->id,
+                'name' => 'Belajar Laravel', // Nama tugas
+                'description' => 'Belajar Laravel di santri koding', // Deskripsi tugas
+                'is_completed' => false, // Status tugas (belum selesai)
+                'priority' => 'medium', // Prioritas tugas
+                'list_id' => TaskList::where('name', 'Belajar')->first()->id, // Mengambil ID list berdasarkan nama
             ],
             [
                 'name' => 'Belajar React',
                 'description' => 'Belajar React di WPU',
-                'is_completed' => true,
+                'is_completed' => true, // Status tugas (sudah selesai)
                 'priority' => 'high',
                 'list_id' => TaskList::where('name', 'Belajar')->first()->id,
             ],
@@ -88,6 +88,6 @@ class TaskSeeder extends Seeder
         ];
 
         // Memasukkan data ke dalam tabel tasks
-        Task::insert($tasks);
+        Task::insert($tasks); // Menggunakan metode insert untuk menambahkan semua tugas sekaligus
     }
 }

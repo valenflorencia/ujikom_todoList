@@ -2,15 +2,15 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
+// Mengimpor kelas yang diperlukan untuk model User
+use Illuminate\Database\Eloquent\Factories\HasFactory; // Mengimpor trait HasFactory untuk factory
+use Illuminate\Foundation\Auth\User as Authenticatable; // Mengimpor kelas Authenticatable untuk autentikasi
+use Illuminate\Notifications\Notifiable; // Mengimpor trait Notifiable untuk notifikasi
 
 class User extends Authenticatable
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
-    use HasFactory, Notifiable;
+    use HasFactory, Notifiable; // Menggunakan trait HasFactory dan Notifiable
 
     /**
      * The attributes that are mass assignable.
@@ -18,9 +18,9 @@ class User extends Authenticatable
      * @var list<string>
      */
     protected $fillable = [
-        'name',
-        'email',
-        'password',
+        'name', // Nama pengguna
+        'email', // Alamat email pengguna
+        'password', // Kata sandi pengguna
     ];
 
     /**
@@ -29,8 +29,8 @@ class User extends Authenticatable
      * @var list<string>
      */
     protected $hidden = [
-        'password',
-        'remember_token',
+        'password', // Kata sandi tidak akan ditampilkan saat serialisasi
+        'remember_token', // Token untuk mengingat pengguna
     ];
 
     /**
@@ -41,8 +41,8 @@ class User extends Authenticatable
     protected function casts(): array
     {
         return [
-            'email_verified_at' => 'datetime',
-            'password' => 'hashed',
+            'email_verified_at' => 'datetime', // Mengonversi email_verified_at menjadi objek datetime
+            'password' => 'hashed', // Mengonversi password menjadi hashed saat disimpan
         ];
     }
 }

@@ -19,21 +19,22 @@ class TaskController extends Controller
             // Mencari tugas yang nama atau deskripsinya sesuai dengan query
             $tasks = Task::where('name', 'like', "%{$query}%")
                 ->orWhere('description', 'like', "%{$query}%")
-                ->latest()
+                ->latest() // Mengurutkan tugas berdasarkan waktu terbaru
                 ->get();
 
             // Mencari list yang namanya sesuai dengan query atau memiliki tugas yang sesuai dengan query
             $lists = TaskList::where('name', 'like', "%{$query}%")
                 ->orWhereHas('tasks', function ($q) use ($query) {
+                    // Mencari tugas dalam list yang sesuai dengan query
                     $q->where('name', 'like', "%{$query}%")
                         ->orWhere('description', 'like', "%{$query}%");
                 })
-                ->with('tasks')
+                ->with('tasks') // Memuat relasi tugas
                 ->get();
 
             // Jika tidak ada tugas yang ditemukan, memuat semua tugas dalam list
             if ($tasks->isEmpty()) {
-                $lists->load('tasks');
+                $lists->load('tasks'); // Memuat semua tugas dalam list
             } else {
                 // Jika ada tugas yang ditemukan, memuat hanya tugas yang sesuai dengan query dalam list
                 $lists->load(['tasks' => function ($q) use ($query) {
@@ -43,16 +44,16 @@ class TaskController extends Controller
             }
         } else {
             // Jika tidak ada input pencarian, mengambil semua tugas dan list dengan tugasnya
-            $tasks = Task::latest()->get();
-            $lists = TaskList::with('tasks')->get();
+            $tasks = Task::latest()->get(); // Mengambil semua tugas terbaru
+            $lists = TaskList::with('tasks')->get(); // Mengambil semua list dengan tugasnya
         }
 
         // Menyiapkan data untuk dikirim ke view
         $data = [
-            'title' => 'Home',
-            'lists' => $lists,
-            'tasks' => $tasks,
-            'priorities' => Task::PRIORITIES
+            'title' => 'Home', // Judul halaman
+            'lists' => $lists, // Daftar list tugas
+            'tasks' => $tasks, // Daftar tugas
+            'priorities' => Task::PRIORITIES // Daftar prioritas tugas
         ];
 
         // Mengembalikan view 'pages.home' dengan data yang disiapkan
@@ -64,10 +65,10 @@ class TaskController extends Controller
     {
         // Validasi input dari permintaan
         $request->validate([
-            'name' => 'required|max:100',
-            'description' => 'max:255',
-            'priority' => 'required|in:low,medium,high',
-            'list_id' => 'required'
+            'name' => 'required|max:100', // Nama tugas harus diisi dan maksimal 100 karakter
+            'description' => 'max:255', // Deskripsi tugas maksimal 255 karakter
+            'priority' => 'required|in:low,medium,high', // Prioritas harus salah satu dari low, medium, high
+            'list_id' => 'required' // ID list tugas harus diisi
         ]);
 
         // Membuat tugas baru dengan data yang valid
@@ -87,7 +88,7 @@ class TaskController extends Controller
     {
         // Mencari tugas berdasarkan ID dan menandainya sebagai selesai
         Task::findOrFail($id)->update([
-            'is_completed' => true
+            'is_completed' => true // Mengupdate status tugas menjadi selesai
         ]);
 
         // Mengarahkan kembali ke halaman sebelumnya
@@ -109,9 +110,9 @@ class TaskController extends Controller
     {
         // Menyiapkan data untuk dikirim ke view
         $data = [
-            'title' => 'Task',
-            'lists' => TaskList::all(),
-            'task' => Task::findOrFail($id),
+            'title' => 'Task', // Judul halaman
+            'lists' => TaskList::all(), // Mengambil semua daftar tugas
+            'task' => Task::findOrFail($id), // Mengambil tugas berdasarkan ID
         ];
 
         // Mengembalikan view 'pages.details' dengan data yang disiapkan
@@ -123,12 +124,12 @@ class TaskController extends Controller
     {
         // Validasi input dari permintaan
         $request->validate([
-            'list_id' => 'required|exists:task_lists,id',
+            'list_id' => 'required|exists:task_lists,id', // ID list harus ada dalam database
         ]);
 
         // Memperbarui list_id tugas
         Task::findOrFail($task->id)->update([
-            'list_id' => $request->list_id
+            'list_id' => $request->list_id // Mengupdate ID list tugas
         ]);
 
         // Mengarahkan kembali ke halaman sebelumnya dengan pesan sukses
@@ -140,10 +141,10 @@ class TaskController extends Controller
     {
         // Validasi input dari permintaan
         $request->validate([
-            'list_id' => 'required',
-            'name' => 'required|max:100',
-            'description' => 'max:255',
-            'priority' => 'required|in:low,medium,high'
+            'list_id' => 'required', // ID list harus diisi
+            'name' => 'required|max:100', // Nama tugas harus diisi dan maksimal 100 karakter
+            'description' => 'max:255', // Deskripsi tugas maksimal 255 karakter
+            'priority' => 'required|in:low,medium,high' // Prioritas harus salah satu dari low, medium, high
         ]);
 
         // Memperbarui tugas dengan data yang valid
