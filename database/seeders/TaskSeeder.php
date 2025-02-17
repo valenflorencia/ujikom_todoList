@@ -4,16 +4,16 @@ namespace Database\Seeders;
 
 use App\Models\Task;
 use App\Models\TaskList;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class TaskSeeder extends Seeder
 {
     /**
-     * Run the database seeds.
+     * Menjalankan seeder untuk mengisi tabel tasks dengan data awal.
      */
     public function run(): void
     {
+        // Data tugas yang akan dimasukkan ke dalam tabel tasks
         $tasks = [
             [
                 'name' => 'Belajar Laravel',
@@ -87,6 +87,7 @@ class TaskSeeder extends Seeder
             ],
         ];
 
+        // Memasukkan data ke dalam tabel tasks
         Task::insert($tasks);
     }
 }
