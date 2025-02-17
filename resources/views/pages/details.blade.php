@@ -1,23 +1,19 @@
 @extends('layouts.app')
-<!-- digunakan untuk menunjukkan bahwa tampilan ini mewarisi dari template induk `layouts.app`.
-    Ini memungkinkan penggunaan kerangka tata letak yang konsisten di seluruh aplikasi. -->
 
 @section('content')
-    <div id="content" class="container"> <!-- digunakan sebagai wadah utama untuk konten halaman. -->
+    <div id="content" class="container mt-4"> 
         <!-- Tombol Kembali -->
-        <div class="d-flex align-items-center">
-            <a href="{{ route('home') }}" class="btn btn-light shadow-sm d-flex align-items-center">
-                <i class="bi bi-arrow-left-short fs-4"></i>
-                <span class="fw-bold fs-5 ms-1">Kembali</span>
+        <div class="d-flex align-items-center mb-3">
+            <a href="{{ route('home') }}" class="btn btn-outline-primary d-flex align-items-center shadow-sm">
+                <i class="bi bi-arrow-left-circle fs-4"></i>
+                <span class="fw-bold fs-5 ms-2">Kembali</span>
             </a>
         </div>
-        <!-- Bagian ini menampilkan tombol "Kembali" yang mengarahkan pengguna ke rute bernama `home`. Tombol ini dirancang dengan kelas Bootstrap untuk tampilan dan tata letak yang responsif. -->
 
         <!-- Notifikasi Sukses -->
-        <!-- Kondisi ini memeriksa apakah ada pesan sukses dalam sesi. Jika ada, maka akan ditampilkan notifikasi sukses dengan menggunakan komponen alert dari Bootstrap. Tombol "Close" memungkinkan pengguna untuk menutup notifikasi tersebut. -->
         @if (session('success'))
-            <div class="alert alert-success alert-dismissible fade show mt-3" role="alert">
-                {{ session('success') }}
+            <div class="alert alert-success alert-dismissible fade show mt-3 shadow-sm" role="alert">
+                <i class="bi bi-check-circle-fill me-2"></i> {{ session('success') }}
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
         @endif
@@ -50,48 +46,47 @@
             </div>
         </div>
 
-        <!-- Kolom Detail -->
-        <!-- Kolom ini menampilkan detail tambahan tentang tugas. Formulir memungkinkan pengguna untuk memindahkan tugas ke daftar lain dengan memilih dari dropdown dan mengirimkan formulir secara otomatis saat pilihan berubah. Bagian ini juga menampilkan prioritas tugas dengan lencana berwarna dan status penyelesaian tugas. -->
-        <div class="col-md-4">
-            <div class="card shadow-lg border-0 rounded-4">
-                <div class="card-header bg-secondary text-white">
-                    <h4 class="fw-bold mb-0">Detail</h4>
-                </div>
-                <div class="card-body">
-                    <form action="{{ route('tasks.changeList', $task->id) }}" method="POST">
-                        @csrf
-                        @method('PATCH')
-                        <label for="list_id" class="form-label fw-semibold">Pindahkan ke:</label>
-                        <select class="form-select shadow-sm" name="list_id" onchange="this.form.submit()">
-                            @foreach ($lists as $list)
-                                <option value="{{ $list->id }}" {{ $list->id == $task->list_id ? 'selected' : '' }}>
-                                    {{ $list->name }}
-                                </option>
-                            @endforeach
-                        </select>
-                    </form>
-
-                    <div class="mt-3">
-                        <h6 class="fw-bold">Prioritas:</h6>
-                        <span class="badge text-bg-{{ $task->priorityClass }} badge-pill px-3 py-2">
-                            {{ ucfirst($task->priority) }}
-                        </span>
+            <!-- Kolom Detail -->
+            <div class="col-md-4">
+                <div class="card shadow-lg border-0 rounded-4">
+                    <div class="card-header bg-secondary text-white">
+                        <h4 class="fw-bold mb-0">Detail</h4>
                     </div>
+                    <div class="card-body">
+                        <form action="{{ route('tasks.changeList', $task->id) }}" method="POST">
+                            @csrf
+                            @method('PATCH')
+                            <label for="list_id" class="form-label fw-semibold">Pindahkan ke:</label>
+                            <select class="form-select shadow-sm" name="list_id" onchange="this.form.submit()">
+                                @foreach ($lists as $list)
+                                    <option value="{{ $list->id }}" {{ $list->id == $task->list_id ? 'selected' : '' }}>
+                                        {{ $list->name }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </form>
 
-                    <div class="mt-3">
-                        <h6 class="fw-bold">Status</h6>
-                        <span class="px-3 py-2">
-                            @if ($task->is_completed == 0)
-                                Belum Selesai
-                            @else
-                                Selesai
-                            @endif
-                        </span>
+                        <div class="mt-3">
+                            <h6 class="fw-bold">Prioritas:</h6>
+                            <span class="badge bg-{{ $task->priorityClass }} badge-pill px-3 py-2">
+                                <i class="bi bi-exclamation-circle"></i> {{ ucfirst($task->priority) }}
+                            </span>
+                        </div>
+
+                        <div class="mt-3">
+                            <h6 class="fw-bold">Status</h6>
+                            <span class="px-3 py-2">
+                                @if ($task->is_completed == 0)
+                                    <i class="bi bi-x-circle text-danger"></i> Belum Selesai
+                                @else
+                                    <i class="bi bi-check-circle text-success"></i> Selesai
+                                @endif
+                            </span>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
     </div>
 
     <!-- Modal Edit Task -->
@@ -107,20 +102,17 @@
                 <div class="modal-body">
                     <input type="hidden" name="list_id" value="{{ $task->list_id }}">
 
-                    <!-- Nama -->
                     <div class="mb-3">
                         <label for="name" class="form-label fw-semibold">Nama Task</label>
                         <input type="text" class="form-control shadow-sm" id="name" name="name"
                             value="{{ $task->name }}" required>
                     </div>
 
-                    <!-- Deskripsi -->
                     <div class="mb-3">
                         <label for="description" class="form-label fw-semibold">Deskripsi</label>
                         <textarea class="form-control shadow-sm" name="description" id="description" rows="3" required>{{ $task->description }}</textarea>
                     </div>
 
-                    <!-- Prioritas -->
                     <div class="mb-3">
                         <label for="priority" class="form-label fw-semibold">Prioritas</label>
                         <select class="form-control shadow-sm" name="priority" id="priority">
