@@ -23,8 +23,7 @@
             <a href="https://github.com/valenflorencia" target="_blank" class="text-white me-3 fs-4">
                 <i class="bi bi-github"></i> <!-- Ikon GitHub -->
             </a>
-            <a href="https://www.instagram.com/s/aGlnaGxpZ2h0OjE4Mzc0NTY2Mzg0MTEzNzEy?story_media_id=3550331440799415880_44081362055&igsh=MWkxZzkzMnJ5b2xjMg=="
-                target="_blank" class="text-white me-3 fs-4">
+            <a href="https://www.instagram.com/vlnflcs/" target="_blank" class="text-white me-3 fs-4">
                 <i class="bi bi-instagram"></i> <!-- Ikon Instagram -->
             </a>
 
