@@ -10,7 +10,6 @@
                 <span class="fw-bold fs-5 ms-2">Kembali</span> <!-- Teks tombol -->
             </a>
         </div>
-
         <!-- Notifikasi Sukses -->
         @if (session('success'))
             <!-- Memeriksa apakah ada pesan sukses dalam sesi -->
