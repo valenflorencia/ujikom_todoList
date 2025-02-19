@@ -13,9 +13,9 @@
             <div class="d-flex flex-column align-items-center text-primary">
                 <p class="text-center fst-italic fs-4">Belum ada tugas yang ditambahkan</p>
                 <button type="button"
-                class="btn btn-outline-primary d-flex align-items-center gap-2 shadow-lg px-4 py-2 rounded-pill"
+                class="btn btn-outline-primary d-flex align-items-center gap-2 shadow-lg px-4 py-3 rounded-pill"
                 data-bs-toggle="modal" data-bs-target="#addListModal">
-                <i class="bi bi-plus-square fs-1"></i> Tambah List
+                <i class="bi bi-plus-square fs-5"></i> Tambah List
             </button>
         </div>
         @endif
