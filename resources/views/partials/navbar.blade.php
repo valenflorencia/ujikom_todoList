@@ -15,7 +15,7 @@
 
     <div class="container d-flex justify-content-between"> <!-- Kontainer untuk elemen navbar -->
         <!-- Nama Aplikasi -->
-        <a class="navbar-brand fw-bolder text-white fs-4" href="#"> <i class="bi bi-houses"></i> AppTugas</a>
+        <a class="navbar-brand fw-bolder text-white fs-4" href="#"> <i class="bi bi-houses"></i> Todo-List</a>
 
         <!-- Profil Pengguna dan Sosial Media -->
         <div class="d-flex align-items-center"> <!-- Flexbox untuk menyusun elemen secara horizontal -->
